@@ -191,7 +191,8 @@ while ($gold_row = $sql->db_Fetch())
             $gold_debit = $gold_debit - ($row[4] < 0?$row[4]:0); // get debits
         }
         $gold_pdf->FancyTable($captions, $data, $gold_sumtrans,$gold_credit,$gold_debit);
-        $gold_pdf->Output($GOLD_PREF['gold_arcloc'] . '/' . $gold_getuserid . '_' . $padmonth . '_' . $ryear . '.pdf', 'F');
+        $gold_arcloc_path = e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+        $gold_pdf->Output($gold_arcloc_path . '/' . $gold_getuserid . '_' . $padmonth . '_' . $ryear . '.pdf', 'F');
         if (!empty($gold_pdf->errmsg))
         {
             echo $gold_pdf->errmsg . "\n";

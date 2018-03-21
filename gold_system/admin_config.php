@@ -103,7 +103,8 @@ if (isset($_POST['updatesettings']))
 // if archive directory specified then check it is writable
 if (!empty($GOLD_PREF['gold_arcloc']))
 {
-    $gold_fp = fopen($GOLD_PREF['gold_arcloc'] . '/index.htm', 'w+');
+    $gold_arcloc_path = $_SERVER['DOCUMENT_ROOT'].e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+    $gold_fp = fopen($gold_arcloc_path . '/index.htm', 'w+');
     if (!$gold_fp)
     {
         $gold_msg .= '<br />Cannot write to archive directory. Check path and permissions.';

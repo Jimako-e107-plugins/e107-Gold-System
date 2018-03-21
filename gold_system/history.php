@@ -38,8 +38,8 @@ if ($GOLD_PREF['gold_pdftrans'] == 1)
     require_once(e_HANDLER . 'file_class.php');
 
     $gold_efile = new e_FILE;
-
-    $gold_filelist = $gold_efile->get_files($GOLD_PREF['gold_arcloc'] . '/', '^' . USERID . '_');
+    $gold_arcloc_path = e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+    $gold_filelist = $gold_efile->get_files($gold_arcloc_path . '/', '^' . USERID . '_');
 
     $count = 0;
     foreach($gold_filelist as $gold_arc)

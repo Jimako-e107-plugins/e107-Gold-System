@@ -194,15 +194,14 @@ if ($gold_action == 'history')
     require_once(e_PLUGIN . 'gold_system/includes/gold_system_shortcodes.php');
     $gold_currentmonth = date('n', $gold_obj->gold_time());;
     $gold_currentyear = date('Y', $gold_obj->gold_time());;
+    
     $currentuser = $gold_uid;
     $gold_months = explode(",", LAN_GS_MONTH);
     $gold_currentmonthname = $gold_months[$gold_currentmonth];
-    require_once(e_HANDLER . 'file_class.php');
-
-    $gold_efile = new e_FILE;
-
-    $gold_filelist = $gold_efile->get_files($GOLD_PREF['gold_arcloc'] . '/', '^' . $currentuser . '_');
-    // print_a($gold_filelist);
+ 
+    $gold_arcloc_path = $_SERVER['DOCUMENT_ROOT'].e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+    $gold_filelist = e107::getFile()->get_files($gold_arcloc_path. '/', '^' . $currentuser . '_');
+ 
     $count = 0;
     foreach($gold_filelist as $gold_arc)
     {
@@ -239,7 +238,7 @@ if ($gold_action == 'history')
 <div id="gold_expand" onclick="expandit(\'gold_history_hide\')">'.LAN_GS_H018.'</div>
 <div id="gold_history_hide" style="display:none" >
 <div id="gold_historytabs" style="width:100%">';
-    // print_a($gold_tabdetail);
+ 
     foreach($gold_tabdetail as $row)
     {
         $gold_hist_prevrecs .= '
@@ -268,10 +267,12 @@ if ($gold_action == 'history')
     // get the sum of transactions up to the date we are displaying at the top
     // then deduct that from the current balance
     $gold_arg = "select * from #gold_system_history left join #user on gold_hist_who = user_id where gold_hist_user_id = " . $currentuser . "  and gold_hist_date between {$gold_start_date}  and {$gold_end_date} order by gold_hist_date desc limit $gold_hist_from,30";
-    if ($sql->db_Select_gen($gold_arg, false))
+    $row2 = $sql->retrieve($gold_arg, true);
+ 
+    if ($row2)
     {
-        while ($row = $sql->db_Fetch())
-        {
+        foreach($row2 as $row)
+        {    
             $gold_trans++;
             if (is_odd($gold_trans))
             {
@@ -390,7 +391,7 @@ if ($gold_action == '' || $gold_action == 'show')
 			<td class="forumheader3" style="text-align:right;" >' . $gold_obj->formation($gold_row['gold_credit']) . '</td>
 			<td class="forumheader3" style="text-align:center;" >
 				<a href="' . e_SELF . '?' . $gold_from . '.edit.' . $gold_row['gold_id'] . '" ><img src="' . e_IMAGE . 'admin_images/edit_16.png" alt="' . ADLAN_GS_M010 . '" title="' . ADLAN_GS_M010 . '" /></a>&nbsp;
-				<a href="' . e_SELF . '?' . $gold_from . '.history.' . $gold_row['gold_id'] . '" ><img src="' . e_IMAGE . 'admin_images/prefs_16.png" alt="' . ADLAN_GS_M011 . '" title="' . ADLAN_GS_M011 . '" /></a></td>
+				<a href="' . e_SELF . '?' . $gold_from . '.history.' . $gold_row['gold_id'] . '" ><i class="fa fa-list-ol"></i></a></td>
 		</tr>';
     }
     $action = 'show';

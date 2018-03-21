@@ -28,11 +28,16 @@ if (!defined('ADMIN_WIDTH'))
 }
 include_lan(e_PLUGIN . 'gold_system/languages/' . e_LANGUAGE . '_admin_gold_system.php');
 // check folder writable
-$gold_fp=fopen($GOLD_PREF['gold_arcloc'].'/index.htm','w+');
+$gold_arcloc_path = $_SERVER['DOCUMENT_ROOT'].e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+$gold_fp=fopen($gold_arcloc_path.'/index.htm','w+');
+ 
 if(!$gold_fp)
 {
 $gold_msg=GOLD_AT_018;
 
+}
+else   {
+$gold_msg='Correct path: '.$gold_arcloc_path.'/index.htm';
 }
 fclose($gold_fp);
 // end check
@@ -66,22 +71,22 @@ if (isset($_POST['gold_acrhive']))
     $lastday = date('t', $gold_start);
     $gold_end = mktime(23, 59, 59, $rmonth, $lastday, $ryear);
     // print date('d m Y H:i:s', $gold_start). ' ' . date('d m Y H:i:s', $gold_end) ;
-    require_once(e_PLUGIN . 'pdf/ufpdf.php');
+    require_once(e_PLUGIN . 'pdf/tcpdf.php');
     // require_once(e_PLUGIN . 'pdf/e107pdf.php');
     $repdate = time();
     $reportfor = date('F Y', $gold_start);
     $gtrans_msg .= GOLD_TC_004 . $reportfor . "\n\n";
-    class GOLDPDF extends UFPDF
+    class GOLDPDF extends TCPDF
     {
         var $errmsg;
-        function GOLDPDF($orientation = 'P', $unit = 'mm', $format = 'A4')
+        function __construct($orientation = 'P', $unit = 'mm', $format = 'A4')
         {
             // $this->e107PDF($orientation, $unit, $format);
-            UFPDF::UFPDF($orientation, $unit, $format);
+            parent::__construct($orientation, $unit, $format);
             $this->errmsg = '';
         }
-
-        function header()
+         
+        function Header()
         {
             global $w, $users_name, $repdate, $reportfor;
             $this->SetTextColor(0);
@@ -125,7 +130,7 @@ if (isset($_POST['gold_acrhive']))
         function FancyTable($header, $data, $gold_sumtrans, $gold_credit = 0, $gold_debit = 0)
         {
             global $w;
-
+            $this->SetTopMargin(23);
             $this->SetLeftMargin(10);
             $this->SetAutoPageBreak(true, 20);
             $this->SetFillColor(224, 235, 255);
@@ -152,7 +157,7 @@ if (isset($_POST['gold_acrhive']))
             $this->Cell(28, 6, "Credit  : " . number_format($gold_credit), 0, 0, 'R', false);
             $this->Cell(27, 6, "Debit : " . number_format($gold_debit), 0, 0, 'R', false);
             $this->Cell(15, 6, "Total : " . number_format($gold_sumtrans), 0, 1, 'R', false);
-        }
+        }   
     }
     // caption widths for table
     $w = array(28, 27, 15, 120);
@@ -173,32 +178,43 @@ if (isset($_POST['gold_acrhive']))
         unset($gold_debit);
         unset($gold_sumtrans);
         $gold_pdf = new GOLDPDF;
-        $gold_pdf->AliasNbPages();
+        $gold_pdf->getAliasNbPages();
         $gold_pdf->SetAuthor('Father Barry\'s Gold System');
         $gold_pdf->SetTitle(GOLD_TC_009);
         $gold_pdf->SetSubject(GOLD_TC_009);
         $gold_pdf->SetKeywords(GOLD_TC_009);
 
-        $gold_pdf->SetFont('Arial', '', 7);
+        $gold_pdf->SetFont('helvetica', '', 10);
         $gold_pdf->SetAutoPageBreak(true);
         $gold_pdf->AddPage();
 
-        $numberof = $gold_sql->db_Select('gold_system_history', '*', 'where gold_hist_user_id=' . $gold_getuserid . ' and gold_hist_date between ' . $gold_start . ' and ' . $gold_end . ' order by gold_hist_date asc', 'nowhere', false);
+        $numberof = $gold_sql->select('gold_system_history', '*', 'where gold_hist_user_id=' . $gold_getuserid . ' and gold_hist_date between ' . $gold_start . ' and ' . $gold_end . ' order by gold_hist_date asc', 'nowhere', false);
         if ($numberof)
-        {
+        {   
             // there are records so create a pdf
-            while ($row = $gold_sql->db_Fetch())
-            {
-                $data[] = array(date('d M Y H:i', $row[2]), $row[3], $row[4], $row[6]);
-                $gold_credit = $gold_credit + ($row[4] > 0?$row[4]:0); // get credits
-                $gold_debit = $gold_debit - ($row[4] < 0?$row[4]:0); // get debits
-                $gold_sumtrans = $gold_sumtrans + $row[4];
+            while ($row = $gold_sql->fetch())
+            { 
+                $data[] = array(date('d M Y H:i', $row['gold_hist_date']), $row['gold_hist_type'], $row['gold_hist_amount'], $row['gold_hist_comment']); 
+                $gold_credit = $gold_credit + ($row['gold_hist_amount'] > 0?$row['gold_hist_amount']:0); // get credits
+                $gold_debit = $gold_debit - ($row['gold_hist_amount'] < 0?$row['gold_hist_amount']:0); // get debits
+                $gold_sumtrans = $gold_sumtrans + $row['gold_hist_amount'];
+          
             }
 
             $gold_pdf->FancyTable($captions, $data, $gold_sumtrans, $gold_credit, $gold_debit);
-
-            $gold_pdf->Output($GOLD_PREF['gold_arcloc'] . '/' . $gold_getuserid . '_' . $padmonth . '_' . $ryear . '.pdf', 'F');
-            if (!empty($gold_pdf->errmsg))
+            
+            $serverpath = $_SERVER['DOCUMENT_ROOT']; 
+                if (substr($serverpath, -1) == '/' || substr($serverpath, -1) == "\\")
+                 {
+                   // strip any training slash
+                   $serverpath = substr($serverpath, 0, -1);
+                 }
+ 
+            $gold_arcloc_path = $serverpath.e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+            $gold_arcloc_path = $gold_arcloc_path. '/' . $gold_getuserid . '_' . $padmonth . '_' . $ryear . '.pdf';
+  
+            $gold_pdf->Output($gold_arcloc_path, 'F');
+           if (!empty($gold_pdf->errmsg))
             {
                 $gtrans_msg .= $gold_pdf->errmsg . "\n";
             }
@@ -208,10 +224,10 @@ if (isset($_POST['gold_acrhive']))
                 // delete history
                 if (intval($_POST['gold_delafter'])==1)
                 {
-                   $nums= $sql->db_Delete('gold_system_history', 'gold_hist_user_id=' . $gold_getuserid . ' and gold_hist_date between ' . $gold_start . ' and ' . $gold_end,false);
+                   $nums= $sql->delete('gold_system_history', 'gold_hist_user_id=' . $gold_getuserid . ' and gold_hist_date between ' . $gold_start . ' and ' . $gold_end,false);
 
                 }
-            }
+            }   
         }
     }
     $execution = time() - $timestart;
@@ -237,11 +253,11 @@ else
 	';
     $gold_year = date('Y');
     $gold_ysel = '<select class="tbox" name="gold_ysel">
-	<option value="2007" ' . ($gold_year == 2007?'selected="selected"':'') . '>2007</option>
-	<option value="2008" ' . ($gold_year == 2008?'selected="selected"':'') . '>2008</option>
-	<option value="2009" ' . ($gold_year == 2009?'selected="selected"':'') . '>2009</option>
-	<option value="2010" ' . ($gold_year == 2010?'selected="selected"':'') . '>2010</option>
-	<option value="2011" ' . ($gold_year == 2011?'selected="selected"':'') . '>2011</option>
+	<option value="2018" ' . ($gold_year == 2018?'selected="selected"':'') . '>2018</option>
+	<option value="2019" ' . ($gold_year == 2019?'selected="selected"':'') . '>2019</option>
+	<option value="2020" ' . ($gold_year == 2020?'selected="selected"':'') . '>2020</option>
+	<option value="2021" ' . ($gold_year == 2021?'selected="selected"':'') . '>2021</option>
+	<option value="2022" ' . ($gold_year == 2022?'selected="selected"':'') . '>2022</option>
 
 	';
     $gold_text = '

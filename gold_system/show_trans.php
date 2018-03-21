@@ -8,7 +8,8 @@ require_once(e_PLUGIN.'gold_system/includes/gold_class.php');
 $gold_obj=new gold;
 
 $file = e_QUERY;
-$filename = $GOLD_PREF['gold_arcloc'] . '/' . $file;
+$gold_arcloc_path = e107::getParser()->replaceConstants($GOLD_PREF['gold_arcloc'],'abs');
+$filename = $gold_arcloc_path . '/' . $file;
 
 $tmp = explode('_', e_QUERY);
 if ($tmp[0] != USERID &&!ADMIN)
