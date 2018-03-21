@@ -15,10 +15,12 @@ require_once('../../class2.php');
 require_once(e_HANDLER . 'userclass_class.php');
 if (isset($_POST['gold_dlok']))
 {
+ 
     $url = $_POST['gold_url'];
     session_start();
     $_SESSION['gold_dl'] = $_POST['gold_url'];
     header("Location:{$url}");
+ 
     exit;
 } elseif (isset($_POST['goldcancel']))
 {
@@ -35,16 +37,20 @@ else
     include_lan(e_PLUGIN . 'gold_download/languages/' . e_LANGUAGE . '.php');
     require_once(e_PLUGIN . 'gold_download/includes/gold_download_shortcodes.php');
     require_once(e_PLUGIN . 'gold_download/templates/gold_download_template.php');
+    
+ 
+    
     // $title = LAN_GS_42;
     // define("e_PAGETITLE", $title);
     global $GOLD_DL_PREF, $gold_obj;
 
     require_once(HEADERF);
     require_once(GOLD_THEME);
-    $gold_request = e_QUERY;
+    $gold_request = e_QUERY;  
     $gold_sql->db_Select('download', 'download_id,download_name', 'where download_id="' . $gold_request . '" or download_name="' . $gold_request . '"', 'nowhere', false);
+    $download  = $gold_sql->db_Fetch(); 
     extract($gold_sql->db_Fetch());
-    $gold_dllist = unserialize($GOLD_DL_PREF['gold_dlclasses']);
+   $gold_dllist = unserialize($GOLD_DL_PREF['gold_dlclasses']);
     if (count($gold_dllist > 0))
     {
         $gold_ulist = explode(',', USERCLASS_LIST);
@@ -61,10 +67,12 @@ else
                 $gold_charge = min($gold_charge, $gold_cost);
             }
         }
+        
+        $download_request_url = e107::url('download', 'get', $download);
         $gold_text = '
 <form method="post" action="' . e_SELF . '" id="gold_dl">
 	<div>
-		<input type="hidden" name="gold_url" value="' . SITEURL . 'request.php?' . e_QUERY . '" />
+		<input type="hidden" name="gold_url" value="' . $download_request_url . '" />
 	</div>';
 
         if ($gold_charge < $gold_dlbalance)
