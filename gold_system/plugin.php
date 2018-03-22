@@ -76,7 +76,7 @@ if (!function_exists('gold_system_uninstall'))
     {
         // get rid of the things we created
         global $sql;
-        $sql->db_Delete('core', ' e107_name="gold" ');
+        $sql->db_Delete('core', ' e107_name="plugin_gold" ');
     }
 }
 

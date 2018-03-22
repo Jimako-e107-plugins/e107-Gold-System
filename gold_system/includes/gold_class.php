@@ -210,7 +210,7 @@ class gold
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold'", false);
         return ;
     }
     function load_prefs()
@@ -221,20 +221,22 @@ class gold
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold' ");
+        
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold' ");
         $row = $sql->db_Fetch();
         if (empty($row['e107_value']))
         {
             // insert default preferences if none exist
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_PREF);
-            $sql->db_Insert('core', "'gold', '$tmp' ");
-            $sql->db_Select('core', '*', "e107_name='gold' ");
+            $sql->db_Insert('core', "'plugin_gold', '$tmp' ");
+            $sql->db_Select('core', '*', "e107_name='plugin_gold' ");
         }
         else
         {
             $GOLD_PREF = $eArrayStorage->ReadArray($row['e107_value']);
         }
+ 
         return;
     }
     // ***************************************************************************
