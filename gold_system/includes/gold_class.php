@@ -210,7 +210,7 @@ class gold
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold'", false);
+        $sql->update('core', "e107_value='$tmp' where e107_name='plugin_gold'", false);
         return ;
     }
     function load_prefs()
@@ -357,7 +357,7 @@ class gold
             if ($gold_param['gold_action'] == 'credit')
             {
                 // add the amount to the user
-                if (!$gold_sql->db_Update('gold_system', "gold_balance = gold_balance + '{$gold_param['gold_amount']}' ,gold_credit=gold_credit + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_user_id']}'", $gold_debug))
+                if (!$gold_sql->update('gold_system', "gold_balance = gold_balance + '{$gold_param['gold_amount']}' ,gold_credit=gold_credit + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_user_id']}'", $gold_debug))
                 {
                     // Failed to add so return an error
                     $gold_return['gold_error_no'] = $gold_return['gold_error_no'] | 32;
@@ -377,7 +377,7 @@ class gold
             if ($gold_param['gold_action'] == 'debit')
             {
                 // deduct the amount
-                if (!$gold_sql->db_Update('gold_system', "gold_balance = gold_balance - '" . $gold_param['gold_amount'] . "',gold_spent=gold_spent + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_user_id']}'", $gold_debug))
+                if (!$gold_sql->update('gold_system', "gold_balance = gold_balance - '" . $gold_param['gold_amount'] . "',gold_spent=gold_spent + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_user_id']}'", $gold_debug))
                 {
                     // failed to debit
                     $gold_return['gold_error_no'] = $gold_return['gold_error_no'] | 32;
@@ -492,7 +492,7 @@ class gold
         {
             // All ok so we carry out the action
             // add the amount tp the recipient
-            if (!$gold_sql->db_Update('gold_system', "gold_balance = gold_balance + '{$gold_param['gold_amount']}' ,gold_credit=gold_credit + '{$gold_param['gold_amount']}' where gold_id =  '{$gold_param['gold_to_id']}'", false))
+            if (!$gold_sql->update('gold_system', "gold_balance = gold_balance + '{$gold_param['gold_amount']}' ,gold_credit=gold_credit + '{$gold_param['gold_amount']}' where gold_id =  '{$gold_param['gold_to_id']}'", false))
             {
                 // failed to update user
                 $gold_return['gold_error_no'] = $gold_return['gold_error_no'] | 32;
@@ -508,7 +508,7 @@ class gold
                 }
             }
             // deduct the amount
-            if (!$gold_sql->db_Update('gold_system', "gold_balance = gold_balance - '{$gold_param['gold_amount']}',gold_spent=gold_spent + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_from_id']}'", false))
+            if (!$gold_sql->update('gold_system', "gold_balance = gold_balance - '{$gold_param['gold_amount']}',gold_spent=gold_spent + '{$gold_param['gold_amount']}' where gold_id = '{$gold_param['gold_from_id']}'", false))
             {
                 // failed to deduct the amount
                 $gold_return['gold_error_no'] = $gold_return['gold_error_no'] | 32;
@@ -1193,7 +1193,7 @@ class gold
     {
         global $eArrayStorage, $gold_sql;
         $gold_tmp = $eArrayStorage->WriteArray($this->gold_additional[$gold_userid]);
-        $gold_sql->db_Update('gold_system', 'gold_additional="' . $gold_tmp . '" where gold_id=' . $gold_userid, false);
+        $gold_sql->update('gold_system', 'gold_additional="' . $gold_tmp . '" where gold_id=' . $gold_userid, false);
     }
     // ***************************************************************************
     // *
