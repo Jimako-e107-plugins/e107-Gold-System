@@ -20,6 +20,52 @@ if (!defined("USER_WIDTH"))
     define(USER_WIDTH, "width:100%;");
 }
 global $gold_shortcodes;
+
+if(deftrue('BOOTSTRAP') === 3)
+{
+// boostrap 3 version 
+define("MAINBOXOPEN", '');      // row
+define("MAINBOXEND",  '');
+define("BOXLINEOPEN", '<div class="row">');       // col-md-6
+define("BOXSTART", '<div class="col-md-6"><div class="panel panel-default">');       // panel, card
+define("BOXHEADINGSTART", '<div class="panel-heading">');
+define("BOXHEADINGEND", '</div>');
+define("BOXBODYSTART", '<div class="panel-body">');
+define("BOXBODYEND", '</div>');
+define("BOXEND", '</div></div>');
+define("BOXLINEEND", '</div>');          // end of col
+}
+else if(deftrue('BOOTSTRAP') === 4)
+{
+ 
+// boostrap 4 version 
+define("MAINBOXOPEN", '');      // row
+define("MAINBOXEND",  '');
+define("BOXLINEOPEN", '<div class="row">');       // col-md-6
+define("BOXSTART", '<div class="col-md-6"><div class="card card-default">');       // panel, card
+define("BOXHEADINGSTART", '<div class="card-header">');
+define("BOXHEADINGEND", '</div>');
+define("BOXBODYSTART", '<div class="card-body">');
+define("BOXBODYEND", '</div>');
+define("BOXEND", '</div></div>');
+define("BOXLINEEND", '</div>');          // end of col
+}
+else {
+//     old table style 
+define("MAINBOXOPEN", '<table class="fborder" style="' . USER_WIDTH . '" >');      // row
+define("MAINBOXEND",  '</table>');
+
+define("BOXLINEOPEN", '<tr>');       // col-md-6
+define("BOXSTART", '<td style="width:50%;vertical-align:top;"><table style="width:100%">');       // panel, card
+define("BOXHEADINGSTART", '<tr><td class="fcaption"  >');
+define("BOXHEADINGEND", '</td></tr>');
+define("BOXBODYSTART", '<td class="forumheader3">');
+define("BOXBODYEND", '</td>');
+define("BOXEND", '</tr></table></td>');
+define("BOXLINEEND", '</tr>');          // end of col     
+}
+
+
 // *********************************************************************************************************
 // *
 // *		Template for History.php History of transactions
@@ -568,43 +614,28 @@ if (!isset($GOLD_CONFIRM_NODL))
 }
 if (!isset($GOLD_MAIN_HEADER))
 {
-    $GOLD_MAIN_HEADER = '
-<table class="fborder" style="' . USER_WIDTH . '" >
-	<tr>
-		<td class="fcaption" colspan="2" >' . LAN_GS_MAIN004 . '</td>
-	</tr>
-	';
+    $GOLD_MAIN_HEADER = MAINBOXOPEN;
 }
 if (!isset($GOLD_MAIN_BLOCK1))
 {
-    $GOLD_MAIN_BLOCK1 = '
-	<tr>
-		<td style="width:50%;vertical-align:top;">
-			<table style="width:100%">
-				<tr>
-					<td class="fcaption"  >' . LAN_GS_MAIN002 . '</td>
-				</tr>
-				<tr>
-					<td class="forumheader3"><b>' . LAN_GS_MAIN007 . '</b><br />&nbsp;<br />
+    $GOLD_MAIN_BLOCK1 = BOXLINEOPEN
+		 .BOXSTART 
+       .BOXHEADINGSTART. LAN_GS_MAIN002 . BOXHEADINGEND 
+			 .BOXBODYSTART.
+			    '<b>' . LAN_GS_MAIN007 . '</b><br />&nbsp;<br />
 					{GOLD_MYHISTORY}
 					{GOLD_MYDONATE}
-					{GOLD_MYPLUGINS}
-					</td>
-				</tr>
-			</table>
-		</td>
-	';
+					{GOLD_MYPLUGINS}'
+				.BOXBODYEND
+		 .BOXEND;
 }
 if (!isset($GOLD_MAIN_BLOCK2))
 {
-    $GOLD_MAIN_BLOCK2 = '
-		<td style="width:50%;vertical-align:top;">
-			<table style="width:100%">
-				<tr>
-					<td class="fcaption"  >' . LAN_GS_MAIN003 . '</td>
-				</tr>
-				<tr>
-					<td class="forumheader3"><b>' . LAN_GS_MAIN008 . '</b><br />&nbsp;<br />
+    $GOLD_MAIN_BLOCK2 = 
+		 BOXSTART
+		 .BOXHEADINGSTART. LAN_GS_MAIN003 . BOXHEADINGEND 
+		 .BOXBODYSTART.
+		' <b>' . LAN_GS_MAIN008 . '</b><br />&nbsp;<br />
 					{GOLD_MYDOWNLOAD}
 					{GOLD_MYPROFILE}
 					{GOLD_MYLINKS}
@@ -613,56 +644,39 @@ if (!isset($GOLD_MAIN_BLOCK2))
 					{GOLD_MYCOMMENTS}
 					{GOLD_MYNEWS}
 					{GOLD_MYCHATS}
-					{GOLD_MYPLUGCHARGE}
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>';
+					{GOLD_MYPLUGCHARGE}'
+						.BOXBODYEND
+		 .BOXEND
+	.BOXLINEEND;
 }
 if (!isset($GOLD_MAIN_BLOCK3))
 {
-    $GOLD_MAIN_BLOCK3 = '
-	<tr>
-		<td style="width:50%;vertical-align:top;">
-			<table style="width:100%">
-				<tr>
-					<td class="fcaption"  >' . LAN_GS_MAIN005 . '</td>
-				</tr>
-				<tr>
-					<td class="forumheader3">&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-	';
+    $GOLD_MAIN_BLOCK3 = BOXLINEOPEN
+    .BOXSTART 
+       .BOXHEADINGSTART. LAN_GS_MAIN005 . BOXHEADINGEND 
+			 .BOXBODYSTART.		
+		     
+		' &nbsp; ' 
+			 	.BOXBODYEND
+		 .BOXEND ; 
 }
 if (!isset($GOLD_MAIN_BLOCK4))
 {
-    $GOLD_MAIN_BLOCK4 = '
-		<td style="width:50%;vertical-align:top;">
-			<table style="width:100%">
-				<tr>
-					<td class="fcaption"  >' . LAN_GS_MAIN006 . '</td>
-				</tr>
-				<tr>
-					<td class="forumheader3">
-					{GOLD_MYDATA}
+    $GOLD_MAIN_BLOCK4 = 
+		BOXSTART
+		 .BOXHEADINGSTART. LAN_GS_MAIN006 . BOXHEADINGEND 
+		   .BOXBODYSTART.
+		    ' {GOLD_MYDATA}
 					{GOLD_MYCLASSES}
 					{GOLD_MYTOP}
-					{GOLD_MYBOTTOM}
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>';
+					{GOLD_MYBOTTOM}'
+			 	.BOXBODYEND
+		 .BOXEND
+	.BOXLINEEND; 
 }
 if (!isset($GOLD_MAIN_FOOTER))
 {
-    $GOLD_MAIN_FOOTER = '
-	<tr>
-		<td class="fcaption" colspan="2" >&nbsp;</td>
-	</tr>
-</table>';
+    $GOLD_MAIN_FOOTER = MAINBOXEND;
 }
 
 if (!isset($GOLD_CONFIRM_USER))

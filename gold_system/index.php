@@ -9,7 +9,11 @@ if (!defined('e107_INIT'))
 require_once(e_PLUGIN . "gold_system/includes/gold_system_shortcodes.php");
 
 require_once(HEADERF);
+
+/* LOADS TEMPLATE FILES - see gold_system_class */
 require(GOLD_THEME);
+
+
 $gold_text .= "<script type='text/javascript'>
 <!--
 function gold_div(divid) {
@@ -38,11 +42,11 @@ foreach($GOLD_PREF['gold_centreshow'] as $key => $value)
         $gold_plugcharge .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myplug' . $key . '\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . $e_gold[0]['gold_centre_charge_title'] . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myplug' . $key . '\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
-			<img id="gold_mydataimg" src="' . e_PLUGIN . 'gold_system/images/expand.png" title="expand/close" alt="expand/close" style="border:0;"/>
+			<img id="gold_mydataimg" src="' . e_PLUGIN_ABS . 'gold_system/images/expand.png" title="expand/close" alt="expand/close" style="border:0;"/>
 		</div>
 		<div style="clear:both;"></div>
 	</div>

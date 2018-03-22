@@ -673,11 +673,11 @@ global $gold_obj, $tp;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mydata\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN040 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mydata\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
-			<img id="gold_mydataimg" src="' . e_PLUGIN . 'gold_system/images/expand.png" title="expand/close" alt="expand/close" style="border:0;"/>
+			<img id="gold_mydataimg" src="' . e_PLUGIN_ABS . 'gold_system/images/expand.png" title="expand/close" alt="expand/close" style="border:0;"/>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -695,7 +695,7 @@ global $gold_obj, $sql2, $GOLD_PREF;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myrich\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN041 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myrich\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -721,7 +721,7 @@ global $gold_obj, $sql2, $GOLD_PREF;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mypoor\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN043 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mypoor\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -746,7 +746,7 @@ SC_BEGIN GOLD_MYCLASSES
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myclass\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN042 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myclass\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -774,7 +774,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myprofile\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN095 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myprofile\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -793,7 +793,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mydload\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN050 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mydload\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -830,7 +830,7 @@ else
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mylink\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . $title . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mylink\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -852,7 +852,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myforum\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN070 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myforum\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -880,7 +880,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mycomment\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN065 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mycomment\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -902,7 +902,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mynews\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN080 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mynews\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -924,7 +924,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_mychat\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN085 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_mychat\');" style="cursor:pointer;float:right;width:19%;text-align:right;">
@@ -946,7 +946,7 @@ global $GOLD_PREF, $gold_obj;
 $retval .= '
 	<div style="width:100%">
 		<div onclick="gold_div(\'gold_myvisit\');" style="cursor:pointer;float:left;width:80%;">
-			<img src="' . THEME . 'images/bullet2.gif" alt="bullet" style="border:0;" />
+			<img src="' . e_PLUGIN_ABS . 'gold_system/img/bullet.png" alt="bullet" style="border:0;" />
 				<b>' . LAN_GS_MAIN090 . '</b>&nbsp;&nbsp;
 		</div>
 		<div onclick="gold_div(\'gold_myvisit\');" style="cursor:pointer;float:right;width:19%;text-align:right;">

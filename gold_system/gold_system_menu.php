@@ -12,11 +12,13 @@
 +---------------------------------------------------------------+
 */
 include_lan(e_PLUGIN . 'gold_system/languages/' . e_LANGUAGE . '_gold_system.php');
+
 if (!defined('e107_INIT'))
 {
     exit;
 }
-global $GOLD_PREF, $sql2, $gold_obj, $grpg_obj, $tp, $PLUGINS_DIRECTORY;
+global $GOLD_PREF, $sql2, $gold_obj, $grpg_obj, $tp ;
+ 
 if (!USER)
 {
     $gold_text = LAN_GS_GM012 . '<br />';
@@ -26,23 +28,26 @@ else
     if ($GOLD_PREF['gold_showpresent'] == 1 && $gold_obj->plugin_active('gold_present'))
     {
         $gold_present = '<div style="text-align:center;">
-		<a href="' . e_PLUGIN . 'gold_present/index.php">' . $tp->parsetemplate('{GOLD_PRESENT_LATEST}') . '</a><br />
+		<a href="' . e_PLUGIN_ABS . 'gold_present/index.php">' . $tp->parsetemplate('{GOLD_PRESENT_LATEST}') . '</a><br />
 		</div>';
     }
     $gold_account .= '
-			' . ($GOLD_PREF['gold_mbuy'] == 1?'<a href="' . e_PLUGIN . 'gold_system/buy_gold.php" >' . LAN_GS_GM002 . ' ' . $GOLD_PREF['gold_currency_name'] . '</a><br />':'') . '
-			' . ($GOLD_PREF['gold_mdonate'] == 1?'<a href="' . e_PLUGIN . 'gold_system/donate.php" >' . LAN_GS_GM003 . ' ' . $GOLD_PREF['gold_currency_name'] . '</a><br />':'') . '
-			' . ($GOLD_PREF['gold_mhistory'] == 1?'<a href="' . e_PLUGIN . 'gold_system/history.php" >' . LAN_GS_GM004 . '</a><br />':'') . '
+			' . ($GOLD_PREF['gold_mbuy'] == 1?'<a href="' . e_PLUGIN_ABS . 'gold_system/buy_gold.php" >' . LAN_GS_GM002 . ' ' . $GOLD_PREF['gold_currency_name'] . '</a><br />':'') . '
+			' . ($GOLD_PREF['gold_mdonate'] == 1?'<a href="' . e_PLUGIN_ABS . 'gold_system/donate.php" >' . LAN_GS_GM003 . ' ' . $GOLD_PREF['gold_currency_name'] . '</a><br />':'') . '
+			' . ($GOLD_PREF['gold_mhistory'] == 1?'<a href="' . e_PLUGIN_ABS . 'gold_system/history.php" >' . LAN_GS_GM004 . '</a><br />':'') . '
 	';
     $gold_pluglist = $gold_obj->gold_plugins;
     ksort($gold_pluglist);
-
-    foreach($gold_pluglist as $gold_row => $it)
+ 
+		foreach($gold_pluglist as $gold_row => $it)
     {
-        if ($gold_obj->plugin_active($gold_row) && $GOLD_PREF['gold_menushow'][$gold_row] == 1 && !empty($GOLD_PREF['gold_link'][$gold_row]) && !empty($GOLD_PREF['gold_title'][$gold_row]))
+ 				if ($gold_obj->plugin_active($gold_row) && $GOLD_PREF['gold_menushow'][$gold_row] == 1  && !empty($GOLD_PREF['gold_link'][$gold_row]) && !empty($GOLD_PREF['gold_title'][$gold_row]))
         {
-            $gold_link = str_replace('{e_PLUGIN}', e_PLUGIN, $GOLD_PREF['gold_link'][$gold_row]);
+ 
+						$gold_link = str_replace('{e_PLUGIN}', e_PLUGIN_ABS, $GOLD_PREF['gold_link'][$gold_row]);
             $gold_pluginlist .= '<a href="' . $gold_link . '" >' . $GOLD_PREF['gold_title'][$gold_row] . '</a><br />' ;
+ 
+                    
         }
     }
     if ($GOLD_PREF['gold_msummary'] == 1)
@@ -86,7 +91,9 @@ else
 
         if (isset($gold_pluginlist))
         {
-            $gold_text .= '
+           
+					 
+					  $gold_text .= '
 	<b>' . LAN_GS_GM015 . '</b></br>';
             $gold_text .= $gold_pluginlist;
         }
@@ -106,7 +113,7 @@ else
     else
     {
         $gold_text .= '
-<div class="fcaption" onclick="gold_menu(\'gold_mine\')" id="gold_mine_div" style="cursor:hand;background-image:url(\'' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM001 . '</div>
+<div class="fcaption" onclick="gold_menu(\'gold_mine\')" id="gold_mine_div" style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM001 . '</div>
 	<div id="gold_mine" style="display:;">';
         if (isset($gold_present))
         {
@@ -122,7 +129,7 @@ else
         {
             $gold_text .= '
  	</div>
-<div class="fcaption" onclick="gold_menu(\'gold_app\')" id="gold_app_div"  style="cursor:hand;background-image:url(\'' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM015 . '</div>
+<div class="fcaption" onclick="gold_menu(\'gold_app\')" id="gold_app_div"  style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM015 . '</div>
 	<div id="gold_app" style="display:;">';
 
             $gold_text .= $gold_pluginlist;
@@ -133,7 +140,7 @@ else
         if (isset($gold_richest))
         {
             $gold_text .= '
-<div class="fcaption" onclick="gold_menu(\'gold_rich\')" id="gold_rich_div" style="cursor:hand;background-image:url(\'' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM011 . '</div>
+<div class="fcaption" onclick="gold_menu(\'gold_rich\')" id="gold_rich_div" style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM011 . '</div>
 	<div id="gold_rich" style="display:;">';
 
             $gold_text .= $gold_richest;
@@ -143,7 +150,7 @@ else
         if (isset($gold_rpg))
         {
             $gold_text .= '
-<div class="fcaption" onclick="gold_menu(\'gold_rpg\')" id="gold_rpg_div" style="cursor:hand;background-image:url(\'' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM016 . '</div>
+<div class="fcaption" onclick="gold_menu(\'gold_rpg\')" id="gold_rpg_div" style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM016 . '</div>
 	<div id="gold_rpg" style="display:;">';
             $gold_text .= $gold_rpg;
             $gold_text .= '
@@ -153,16 +160,16 @@ else
         <script type="text/javascript" >
         var goldmenu_sections = new Array("gold_mine","gold_app"' . (isset($gold_richest)?',"gold_rich"':'') . '' . (isset($gold_rpg) ?',"gold_rpg"':'') . ')
         var goldmenu_open = new Array(true,true,false,false) // initial menu status
-        var gold_menu_img_open="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/open.png"
-        var gold_menu_img_close="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/close.png"
+        var gold_menu_img_open="' . e_PLUGIN_ABS . 'gold_system/images/open.png"
+        var gold_menu_img_close="' . e_PLUGIN_ABS . 'gold_system/images/close.png"
 
 gold_menu()
         </script>';
 }
 }
-if (file_exists(e_PLUGIN . 'gold_system/images/gold_menu.png'))
+if (file_exists(e_PLUGIN. 'gold_system/images/gold_menu.png'))
 {
-$gold_caption = '<img src="' . e_PLUGIN . 'gold_system/images/gold_menu.png" style="border:0px;" alt="' . $GOLD_PREF['gold_currency_name'] . '" /> ' . $GOLD_PREF['gold_currency_name'];
+$gold_caption = '<img src="' . e_PLUGIN_ABS . 'gold_system/images/gold_menu.png" style="border:0px;" alt="' . $GOLD_PREF['gold_currency_name'] . '" /> ' . $GOLD_PREF['gold_currency_name'];
 }
 else
 {
