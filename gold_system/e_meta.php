@@ -15,7 +15,7 @@ if (!defined('e107_INIT'))
 {
     exit;
 }
-global $GOLD_PREF, $gold_obj, $pref, $PLUGINS_DIRECTORY,$gold_shortcodes,$forum_shortcodes;
+global $GOLD_PREF, $gold_obj, $pref, $gold_shortcodes,$forum_shortcodes;
 if (!isset($pref['plug_installed']['gold_system']))
 {
     return ;
@@ -26,12 +26,12 @@ echo '<link rel="stylesheet" href="' . e_PLUGIN_ABS . 'gold_system/includes/tabv
 echo '<link rel="stylesheet" href="' . e_PLUGIN_ABS . 'gold_system/includes/tabview/css/tab-view.css" type="text/css" />';
 echo '<link rel="stylesheet" href="' . e_PLUGIN_ABS . 'gold_system/includes/bubble/css/bubble-tooltip.css" type="text/css"  media="screen" />';
 
-echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/includes/gold_system.js"></script>';
+echo '<script type="text/javascript" src="' . e_PLUGIN_ABS . 'gold_system/includes/gold_system.js"></script>';
 
-echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/includes/tabview/js/ajax.js"></script>';
-echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/includes/tabview/js/ajax-dynamic-list.js"></script>';
-echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/includes/tabview/js/tab-view.js"></script>';
-echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/includes/bubble/js/bubble-tooltip.js"></script>';
+echo '<script type="text/javascript" src="' . e_PLUGIN_ABS . 'gold_system/includes/tabview/js/ajax.js"></script>';
+echo '<script type="text/javascript" src="' . e_PLUGIN_ABS . 'gold_system/includes/tabview/js/ajax-dynamic-list.js"></script>';
+echo '<script type="text/javascript" src="' . e_PLUGIN_ABS . 'gold_system/includes/tabview/js/tab-view.js"></script>';
+echo '<script type="text/javascript" src="' . e_PLUGIN_ABS . 'gold_system/includes/bubble/js/bubble-tooltip.js"></script>';
 
 require_once(e_PLUGIN . 'gold_system/includes/gold_class.php');
 
@@ -51,11 +51,11 @@ if (e_PAGE == 'user.php')
     $gold_pluginid = $gold_plugin_row['plugin_id'];
     if ($gold_uuid == USERID)
     {
-        $gold_linkHist = "<a href='" . e_PLUGIN . "gold_system/history.php' ><img src='" . e_IMAGE . "admin_images/prefs_16.png' style='border:0px;' alt='View History'></a>";
+        $gold_linkHist = "<a href='" . e_PLUGIN_ABS . "gold_system/history.php' ><img src='" . e_PLUGIN_ABS . "gold_system/img/prefs_16.png' style='border:0px;' alt='View History'></a>";
     }
     else if (getPerms($gold_pluginid))
     {
-        $gold_linkHist = "<a href='" . e_PLUGIN . "gold_system/admin_gold.php?0.history." . $gold_uuid . "'><img src='" . e_IMAGE . "admin_images/prefs_16.png' style='border:0px;' alt='View History'></a>";
+        $gold_linkHist = "<a href='" . e_PLUGIN_ABS . "gold_system/admin_gold.php?0.history." . $gold_uuid . "'><img src='" . e_PLUGIN_ABS . "gold_system/img/prefs_16.png' style='border:0px;' alt='View History'></a>";
     }
     $detect1 = strpos($USER_FULL_TEMPLATE, "{USER_VISITS}");
     $detect2 = strpos($USER_FULL_TEMPLATE, "{USER_UPDATE_LINK}") - 1;

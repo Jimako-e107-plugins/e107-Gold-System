@@ -110,7 +110,7 @@ return $gold_yearsel;
 SC_END
 
 SC_BEGIN GOLD_SEL_FILTER
-return '<input type="submit" value="'.LAN_GS_H037.'" class="button" name="gold_filter" />';
+return '<input type="submit" value="'.LAN_GS_H037.'" class="button btn btn-primary" name="gold_filter" />';
 SC_END
 
 SC_BEGIN GOLD_HIST_TITLE
@@ -207,10 +207,10 @@ return $gold_obj->select_user("user", $user);
 SC_END
 
 SC_BEGIN GOLD_DONATE_AMOUNT
-return '<input class="tbox" type="text" size="25" maxlength="10" name="amount" value="' . $_POST['amount'] . '" />';
+return '<input class="tbox form-control" type="text" size="25" maxlength="10" name="amount" value="' . $_POST['amount'] . '" />';
 SC_END
 SC_BEGIN GOLD_DONATE_COMMENT
-return '<textarea class="tbox" cols="22" rows="5" style="width:80%" name="comment" >' . $_POST['comment'] . '</textarea>';
+return '<textarea class="tbox form-control" cols="22" rows="5" style="width:80%" name="comment" >' . $_POST['comment'] . '</textarea>';
 SC_END
 
 SC_BEGIN GOLD_DONATE_SUBMIT
@@ -229,7 +229,7 @@ SC_END
 
 SC_BEGIN GOLD_BUY_AVATAR_IMAGE
 global $tp,$gold_userimage;
-return '<input class="tbox" type="text" name="avatar" size="60" onKeyDown=\'avatar_remote();\' value="'.$tp->toFORM($gold_userimage).'"/>';
+return '<input class="tbox form-control" type="text" name="avatar" size="60" onKeyDown=\'avatar_remote();\' value="'.$tp->toFORM($gold_userimage).'"/>';
 SC_END
 
 SC_BEGIN GOLD_BUY_PAYPAL
@@ -494,7 +494,7 @@ SC_END
 #
 #SC_BEGIN GOLD_BUY_TITLE
 #global $display;
-#return '<input class="tbox" type="text" name="customtitle" value="'.$display.'" />';
+#return '<input class="tbox form-control" type="text" name="customtitle" value="'.$display.'" />';
 #SC_END
 #
 #SC_BEGIN GOLD_BUY_SUBMIT
@@ -503,7 +503,7 @@ SC_END
 #
 #SC_BEGIN GOLD_BUY_DISPLAYNAME
 #global $display, $GOLD_PREF;
-#return '<input class="tbox" type="text" name="display_name" maxlength="'.$GOLD_PREF['displayname_maxlength'].'" value="'.$display.'" />';
+#return '<input class="tbox form-control" type="text" name="display_name" maxlength="'.$GOLD_PREF['displayname_maxlength'].'" value="'.$display.'" />';
 #SC_END
 #
 #SC_BEGIN GOLD_BUY_SIGPREVIEW
@@ -514,7 +514,7 @@ SC_END
 #SC_BEGIN GOLD_BUY_SIGNATURE
 #global $display;
 #
-#return "<textarea class='tbox signature' name='signature' cols='58' style='width:80%' rows='4' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);'>{$display}</textarea>
+#return "<textarea class='tbox form-control signature' name='signature' cols='58' style='width:80%' rows='4' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);'>{$display}</textarea>
 #<input id='goldhelp' class='helpbox' type='text' name='goldhelp' size='100' style='width:80%'/>
 #			<br />" . display_help("goldhelp");;
 #SC_END
@@ -536,7 +536,7 @@ SC_END
 #
 #SC_BEGIN GOLD_BUY_AVATAR_UPLOAD
 #global $upload;
-#return "<input class='tbox' id='upload' {$upload} name='file_userfile[]' type='file' size='47' onchange=\"avatar_upload();\" />";
+#return "<input class='tbox form-control' id='upload' {$upload} name='file_userfile[]' type='file' size='47' onchange=\"avatar_upload();\" />";
 #SC_END
 #
 #SC_BEGIN GOLD_BUY_AVATAR_STATUS

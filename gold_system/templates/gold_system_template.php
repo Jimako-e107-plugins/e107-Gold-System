@@ -34,6 +34,13 @@ define("BOXBODYSTART", '<div class="panel-body">');
 define("BOXBODYEND", '</div>');
 define("BOXEND", '</div></div>');
 define("BOXLINEEND", '</div>');          // end of col
+
+define("TABLEHISTORYOPEN", '<div class="table-responsive" id="gold_history"><table class="table">');   
+define("TABLEHISTORYEND", "</table></div>"); 
+define("TABLEDONATEOPEN", '<div class="table-responsive" id="gold_donate"><table class="table">');   
+define("TABLEDONATEEND", "</table></div>");
+
+
 }
 else if(deftrue('BOOTSTRAP') === 4)
 {
@@ -49,6 +56,14 @@ define("BOXBODYSTART", '<div class="card-body">');
 define("BOXBODYEND", '</div>');
 define("BOXEND", '</div></div>');
 define("BOXLINEEND", '</div>');          // end of col
+
+define("TABLEHISTORYOPEN", '<div class="table-responsive" id="gold_history">
+  <table class="table">');   
+define("TABLEHISTORYEND", "</table></div>"); 
+
+define("TABLEDONATEOPEN", '<div class="table-responsive" id="gold_donate">
+  <table class="table">');   
+define("TABLEDONATEEND", "</table></div>"); 
 }
 else {
 //     old table style 
@@ -62,7 +77,13 @@ define("BOXHEADINGEND", '</td></tr>');
 define("BOXBODYSTART", '<td class="forumheader3">');
 define("BOXBODYEND", '</td>');
 define("BOXEND", '</tr></table></td>');
-define("BOXLINEEND", '</tr>');          // end of col     
+define("BOXLINEEND", '</tr>');          // end of col    
+
+define("TABLEHISTORYOPEN", "<table class='fborder' style='" . USER_WIDTH . "' id='gold_history'>");   
+define("TABLEHISTORYEND", "</table>");    
+
+define("TABLEDONATEOPEN", "<table class='fborder' style='" . USER_WIDTH . "' id='gold_donate'>");   
+define("TABLEDONATEEND", "</table>");
 }
 
 
@@ -74,8 +95,8 @@ define("BOXLINEEND", '</tr>');          // end of col
 // *********************************************************************************************************
 if (!isset($GOLD_HISTORY_THEADER))
 {
-    $GOLD_HISTORY_THEADER = "
-	<table class='fborder' style='" . USER_WIDTH . "' id='gold_history'>
+    $GOLD_HISTORY_THEADER = TABLEHISTORYOPEN."
+ 
 		<thead>
 		<tr>
 			<td class='fcaption' colspan='5'>{GOLD_HIST_TITLE}</td>
@@ -122,8 +143,8 @@ if (!isset($GOLD_HISTORY_TFOOTER))
 		<tr>
 			<td class='forumheader'>" . LAN_GS_H012 . " <b>{GOLD_HIST_TRANS}</b></td>
 			<td class='forumheader' colspan='2' >{GOLD_CURRENCY_NAME} " . LAN_GS_H013 . " <b>{GOLD_HIST_GOLDIN}</b></td>
-			<td class='forumheader' >{GOLD_CURRENCY_NAME} " . LAN_GS_H014 . " <b>{GOLD_HIST_GOLDOUT}</b></td>
-			<td class='forumheader' >&nbsp;</td>
+			<td class='forumheader' colspan='2' >{GOLD_CURRENCY_NAME} " . LAN_GS_H014 . " <b>{GOLD_HIST_GOLDOUT}</b></td>
+ 
 		</tr>
 		<tr>
 			<td class='forumheader2' colspan='6'>{GOLD_HIST_NEXTREV}&nbsp;</td>
@@ -131,7 +152,7 @@ if (!isset($GOLD_HISTORY_TFOOTER))
 		<tr>
 			<td class='fcaption' colspan='5'>&nbsp;</td>
 		</tr>
-	</table>";
+ ".TABLEHISTORYEND;
 }
 // *********************************************************************************************************
 // *
@@ -140,8 +161,7 @@ if (!isset($GOLD_HISTORY_TFOOTER))
 // *********************************************************************************************************
 if (!isset($GOLD_HISTORY_HEADER))
 {
-    $GOLD_HISTORY_HEADER = "
-	<table class='fborder' style='" . USER_WIDTH . "' id='gold_history'>
+    $GOLD_HISTORY_HEADER = TABLEHISTORYOPEN."
 		<thead>
 		<tr>
 			<td class='fcaption' colspan='5'>{GOLD_HIST_TITLE}</td>
@@ -188,8 +208,8 @@ if (!isset($GOLD_HISTORY_FOOTER))
 		<tr>
 			<td class='forumheader'>" . LAN_GS_H012 . " <b>{GOLD_HIST_TRANS}</b></td>
 			<td class='forumheader' colspan='2' >{GOLD_CURRENCY_NAME} " . LAN_GS_H013 . " <b>{GOLD_HIST_GOLDIN}</b></td>
-			<td class='forumheader' >{GOLD_CURRENCY_NAME} " . LAN_GS_H014 . " <b>{GOLD_HIST_GOLDOUT}</b></td>
-			<td class='forumheader' >&nbsp;</td>
+			<td class='forumheader' colspan='2' >{GOLD_CURRENCY_NAME} " . LAN_GS_H014 . " <b>{GOLD_HIST_GOLDOUT}</b></td>
+ 
 		</tr>
 		<tr>
 			<td class='forumheader2' colspan='6'>{GOLD_HIST_NEXTREV}&nbsp;</td>
@@ -197,7 +217,7 @@ if (!isset($GOLD_HISTORY_FOOTER))
 		<tr>
 			<td class='fcaption' colspan='5'>&nbsp;</td>
 		</tr>
-	</table>";
+	 ".TABLEHISTORYEND;
 }
 // *********************************************************************************************************
 // *
@@ -206,8 +226,8 @@ if (!isset($GOLD_HISTORY_FOOTER))
 // *********************************************************************************************************
 if (!isset($GOLD_DONATE))
 {
-    $GOLD_DONATE = '
-<table class="fborder" style="' . USER_WIDTH . '">
+    $GOLD_DONATE = TABLEDONATEOPEN.'
+ 
 	<tr>
 		<td colspan="2" class="fcaption">' . LAN_GS_6 . ' {GOLD_CURRENCY_NAME}</td>
 	</tr>
@@ -239,8 +259,7 @@ if (!isset($GOLD_DONATE))
 	<tr>
 		<td colspan="2" class="fcaption">&nbsp;</td>
 	</tr>
-</table>
-';
+'.TABLEDONATEEND;
 }
 // *********************************************************************************************************
 // *

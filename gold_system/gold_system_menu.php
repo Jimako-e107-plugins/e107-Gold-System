@@ -78,7 +78,7 @@ else
     if ($GOLD_PREF["gold_expanding"] != 1)
     {
         $gold_text .= '
-	<b>' . LAN_GS_GM001 . '</b>';
+	<b>' . LAN_GS_GM001 . '</b><br>';
         if (isset($gold_present))
         {
             $gold_text .= $gold_present;

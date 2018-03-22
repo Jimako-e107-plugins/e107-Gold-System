@@ -189,14 +189,14 @@ else
 {
     // traditional display of all history records
     $gold_text .= "
-<form method='post' action='" . e_SELF . "' id='gold_form' >";
+<form method='post' action='" . e_SELF . "' id='gold_form' class='form-inline'>";
 
     $gold_currentmonth = intval($_POST['gold_currentmonth']);
     if ($gold_currentmonth == 0)
     {
         $gold_currentmonth = date('m');
     }
-    $gold_currentmonthname = '<select name="gold_currentmonth" class="tbox">
+    $gold_currentmonthname = '<select name="gold_currentmonth" class="tbox form-control"  >
 	<option value="1" ' . ($gold_currentmonth == 1?'selected="selected"':'') . '>' . LAN_GS_H025 . '</option>
 	<option value="2" ' . ($gold_currentmonth == 2?'selected="selected"':'') . '>' . LAN_GS_H026 . '</option>
 	<option value="3" ' . ($gold_currentmonth == 3?'selected="selected"':'') . '>' . LAN_GS_H027 . '</option>
@@ -215,8 +215,8 @@ else
     {
         $gold_currentyear = date('Y');
     }
-    $gold_yearsel = '<select class="tbox" name="gold_currentyear">';
-    for ($i = 2006;$i <= date('Y');$i++)
+    $gold_yearsel = '<select class="tbox form-control" name="gold_currentyear">';
+    for ($i = 2018;$i <= date('Y');$i++)
     {
         $gold_yearsel .= '<option value="' . $i . '" ' . ($gold_currentyear == $i?'selected="selected"':'') . '>' . $i . '</option>';
     }

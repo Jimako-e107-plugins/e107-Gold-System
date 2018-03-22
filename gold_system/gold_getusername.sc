@@ -46,7 +46,7 @@ var ajax_list_externalFile = \''.SITEURL.$PLUGINS_DIRECTORY.'gold_system/getuser
 var minimumLettersBeforeLookup = '.$gold_numchars.'; // Number of letters entered before a lookup is performed.
 	</script>
 
-		<input type="text"  onmouseover="showToolTip(event,\''.LAN_GS_ACTION08.'\');return true" onmouseout="hideToolTip()" id="'.$tmp[0].'" name="'.$tmp[0].'" class="tbox" value="'.$gold_uname.'" onkeyup="ajax_showOptions(this,\'\',event)" />
+		<input type="text"  onmouseover="showToolTip(event,\''.LAN_GS_ACTION08.'\');return true" onmouseout="hideToolTip()" id="'.$tmp[0].'" name="'.$tmp[0].'" class="tbox form-control" value="'.$gold_uname.'" onkeyup="ajax_showOptions(this,\'\',event)" />
 ';
 }
 else
