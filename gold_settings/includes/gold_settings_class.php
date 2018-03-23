@@ -43,7 +43,7 @@ class gold_settings
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_SETTINGS_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold_settings'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_settings'", false);
         return ;
     }
     function load_prefs()
@@ -54,7 +54,7 @@ class gold_settings
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold_settings' ");
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_settings' ");
         $row = $sql->db_Fetch();
         if (empty($row['e107_value']))
         {

@@ -81,7 +81,7 @@ if (!function_exists('gold_bookie_uninstall'))
         // get rid of the things we created
         global $sql;
 
-        $sql->db_Delete('core', ' e107_name="gold_shop" ');
+        $sql->db_Delete('core', ' e107_name="plugin_gold_shop" ');
     }
 }
 

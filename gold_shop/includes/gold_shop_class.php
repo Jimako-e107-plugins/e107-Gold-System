@@ -39,7 +39,7 @@ class gold_shop
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_SHOP_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold_shop'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_shop'", false);
         return ;
     }
     function load_prefs()
@@ -50,7 +50,7 @@ class gold_shop
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold_shop' ");
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_shop' ");
         $row = $sql->db_Fetch();
 
         if (empty($row['e107_value']))
@@ -59,7 +59,7 @@ class gold_shop
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_SHOP_PREF);
             $sql->db_Insert('core', "'gold_shop', '$tmp' ");
-            $sql->db_Select('core', '*', "e107_name='gold_shop' ");
+            $sql->db_Select('core', '*', "e107_name='plugin_gold_shop' ");
         }
         else
         {

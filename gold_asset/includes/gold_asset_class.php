@@ -39,7 +39,7 @@ class gold_asset
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_ASSET_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold_asset'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_asset'", false);
         return ;
     }
     function load_prefs()
@@ -50,7 +50,7 @@ class gold_asset
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold_asset' ");
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_asset' ");
         $row = $sql->db_Fetch();
 
         if (empty($row['e107_value']))
@@ -59,7 +59,7 @@ class gold_asset
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_ASSET_PREF);
             $sql->db_Insert('core', "'gold_asset', '$tmp' ");
-            $sql->db_Select('core', '*', "e107_name='gold_asset' ");
+            $sql->db_Select('core', '*', "e107_name='plugin_gold_asset' ");
         }
         else
         {

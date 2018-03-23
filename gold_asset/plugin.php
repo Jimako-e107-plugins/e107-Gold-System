@@ -87,7 +87,7 @@ if (!function_exists('gold_asset_uninstall'))
     function gold_asset_uninstall()
     {
         global $sql;
-        $sql->db_Delete('core', 'e107_name="gold_asset" ');
+        $sql->db_Delete('core', 'e107_name="plugin_gold_asset" ');
     }
 }
 

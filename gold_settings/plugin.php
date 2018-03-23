@@ -58,7 +58,7 @@ if (!function_exists('gold_settings_uninstall'))
     {
         // get rid of the things we created
         global $sql;
-        $sql->db_Delete('core', ' e107_name="gold_settings" ');
+        $sql->db_Delete('core', ' e107_name="plugin_gold_settings" ');
     }
 }
 
