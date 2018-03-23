@@ -17,7 +17,8 @@ else
     $gasset_userid = intval($gasset_parmlist[0]);
 }
 include_lan(e_PLUGIN . "gold_asset/languages/" . e_LANGUAGE . "_goldasset.php");
-if (e_PAGE == 'user.php')
+//if (e_PAGE == 'user.php')
+if (e_PAGE == 'user.php' OR strpos(e_REQUEST_URI,'/user/') !== false )
 {
     // if the page is the user display page then get the user's id
     // and read in all the assets

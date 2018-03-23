@@ -33,13 +33,15 @@ case 16:
 			$gasset_icon='icon_32';
 	break;
 }
-if (e_PAGE == 'user.php')
+//if (e_PAGE == 'user.php')
+if (e_PAGE == 'user.php' OR strpos(e_REQUEST_URI,'/user/') !== false )
 {
     // if the page is the user display page then get the user's id
     $tmp = explode('.', e_QUERY);
     $gasset_userid = intval($tmp[1]);
 }
-if(e_PAGE=='forum_viewtopic.php')
+//if(e_PAGE=='forum_viewtopic.php')
+(e_PAGE == 'forum_viewtopic.php' OR strpos(e_REQUEST_URI,'/forum/') !== false )
 {
 	$gasset_userid=$post_info['user_id'];
 }

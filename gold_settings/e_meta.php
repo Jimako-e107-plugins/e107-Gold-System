@@ -12,10 +12,10 @@ echo '<script type="text/javascript" src="' . SITEURL . $PLUGINS_DIRECTORY . 'go
 echo '<script type="text/javascript">
 var gold_settings_confirm_pre="' . GSET_GS_S32 . '"
 var gold_settings_confirm_post="' . GSET_GS_S33 . '"
-</script>';
+</script>';                                                         user/settings
 
 // if (e_PAGE == 'usersettings.php' && (!is_numeric(e_QUERY) || e_QUERY == USERID || e_QUERY == ''))
-if (!check_class($GOLD_PREF['gold_exempt_usersettings']) && (e_PAGE == 'usersettings.php' || e_PAGE == 'usersettingshandler.php' && (!is_numeric(e_QUERY) || e_QUERY == USERID || e_QUERY == '')))
+if (!check_class($GOLD_PREF['gold_exempt_usersettings']) && (e_PAGE == 'usersettings.php' || e_PAGE == 'usersettingshandler.php' || strpos(e_REQUEST_URI,'/forum/') !== false  && (!is_numeric(e_QUERY) || e_QUERY == USERID || e_QUERY == '')))
 {
     $qry = "SELECT u.*, ue.* FROM #user AS u
 	LEFT JOIN #user_extended AS ue ON ue.user_extended_id = u.user_id

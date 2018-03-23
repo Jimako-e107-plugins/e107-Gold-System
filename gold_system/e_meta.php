@@ -41,7 +41,8 @@ if (!is_object($gold_obj))
     $gold_obj = new gold;
 }
 
-if (e_PAGE == 'user.php')
+//if (e_PAGE == 'user.php')
+if (e_PAGE == 'user.php' OR strpos(e_REQUEST_URI,'/user/') !== false )
 {
     $gold_uuid = intval($qs[1]);
     $goldID = $gold_obj->gold_balance($gold_uuid);
