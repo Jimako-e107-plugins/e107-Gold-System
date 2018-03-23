@@ -38,7 +38,7 @@ class gold_dl
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_DL_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold_download'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_download'", false);
         return ;
     }
     function load_prefs()
@@ -49,7 +49,7 @@ class gold_dl
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold_download' ");
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_download' ");
         $row = $sql->db_Fetch();
 
         if (empty($row['e107_value']))
@@ -58,7 +58,7 @@ class gold_dl
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_DL_PREF);
             $sql->db_Insert('core', "'gold_download', '$tmp' ");
-            $sql->db_Select('core', '*', "e107_name='gold_download' ");
+            $sql->db_Select('core', '*', "e107_name='plugin_gold_download' ");
         }
         else
         {

@@ -61,7 +61,7 @@ if (!function_exists('gold_classes_uninstall'))
         global $sql;
         // $sql->db_Delete("rate", " rate_table='gold' ");
         // $sql->db_Delete("comments", " comment_type='gold' ");
-        $sql->db_Delete('core', ' e107_name="gold_class" ');
+        $sql->db_Delete('core', ' e107_name="plugin_gold_class" ');
     }
 }
 

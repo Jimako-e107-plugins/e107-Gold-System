@@ -48,7 +48,7 @@ class goldclasses
             $sql = new db;
         }
         $tmp = $eArrayStorage->WriteArray($GOLD_CLASSPREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='gold_classes'", false);
+        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_classes'", false);
         return ;
     }
     function load_prefs()
@@ -59,7 +59,7 @@ class goldclasses
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='gold_classes' ");
+        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_classes' ");
         $row = $sql->db_Fetch();
 
         if (empty($row['e107_value']))
@@ -68,7 +68,7 @@ class goldclasses
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_CLASSPREF);
             $sql->db_Insert('core', "'gold_classes', '$tmp' ");
-            $sql->db_Select('core', '*', "e107_name='gold_classes' ");
+            $sql->db_Select('core', '*', "e107_name='plugin_gold_classes' ");
         }
         else
         {
