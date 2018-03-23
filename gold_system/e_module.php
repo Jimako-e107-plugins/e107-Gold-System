@@ -31,7 +31,7 @@ if (!is_object($gold_obj))
 require_once(e_PLUGIN . 'gold_system/includes/gold_class.php');
     $gold_obj = new gold;
 }
-
+ 
 // ////////////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////
 // START REWARDS
@@ -59,8 +59,10 @@ if ((isset($_POST['chat_submit'])) && ($_POST['cmessage'] != "") && (!$sql->db_S
     $gold_obj->gold_modify($gold_param);
     return;
 }
-// edit forum post.
-if ($GOLD_PREF['forum_addsub'] == 1 && e_PAGE == 'forum_post.php' && (isset($_POST['update_thread']) || isset($_POST['update_reply'])) && strpos(e_QUERY, 'edit.') !== false)
+
+// edit forum post. forum/post/ 
+if ($GOLD_PREF['forum_addsub'] == 1 && (e_PAGE == 'forum_post.php' OR strpos(e_REQUEST_URI,'/forum/post/') !== false ) 
+&& (isset($_POST['update_thread']) || isset($_POST['update_reply'])) && strpos(e_QUERY, 'edit.') !== false)
 {
     // saving of an edited post
 
@@ -246,9 +248,13 @@ if ($GOLD_PREF['forum_addsub'] == 1 && e_PAGE == 'forum_post.php' && (isset($_PO
     }
     // die("W");
 }
-if ((e_PAGE == "forum_post.php") && (isset($_POST['newthread'])) && (!$sql->db_Select("forum_t", "*", "thread_thread='" . $_POST['post'] . "' AND thread_name='' AND thread_user='" . USERID . "." . USERNAME . "' AND thread_lastpost+84600>" . time())))
+
+
+if ((e_PAGE == 'forum_post.php' OR strpos(e_REQUEST_URI,'/forum/post/') !== false )  && (isset($_POST['newthread'])) && 
+(!$sql->select("forum_t", "*", "thread_thread='" . $_POST['post'] . "' AND thread_name='' AND thread_user='" . USERID . "." . USERNAME . "' AND thread_lastpost+84600>" . time())))
 {
-    // Credit user for a new thread in the forum
+ 
+	  // Credit user for a new thread in the forum
     $gold_postlen = $tp->toDB(strlen($_POST['post']));
     // if the post is longer than the minimum for a reward
     if ($GOLD_PREF['gold_reward_type'] == "post" && $gold_postlen >= $GOLD_PREF['gold_threadmin'])
@@ -304,7 +310,7 @@ if ((e_PAGE == "forum_post.php") && (isset($_POST['newthread'])) && (!$sql->db_S
     return;
 }
 
-if ((e_PAGE == 'forum_post.php') && (isset($_POST['reply'])) && (!$sql->db_Select("forum_t", "*", "thread_thread='" . $_POST['post'] . "' AND thread_name='' AND thread_user='" . USERID . "." . USERNAME . "' AND thread_lastpost+84600>" . time())))
+if ((e_PAGE == 'forum_post.php' OR strpos(e_REQUEST_URI,'/forum/post/') !== false ) && (isset($_POST['reply'])) && (!$sql->db_Select("forum_t", "*", "thread_thread='" . $_POST['post'] . "' AND thread_name='' AND thread_user='" . USERID . "." . USERNAME . "' AND thread_lastpost+84600>" . time())))
 {
     // Credit user for a new thread in the forum
     $gold_postlen = $tp->toDB(strlen($_POST['post']));
@@ -398,7 +404,7 @@ if ((e_PAGE == 'forum_post.php') && (isset($_POST['reply'])) && (!$sql->db_Selec
     // return;
 }
 // Old Auto Arcade Integration
-$e_event->register('newscore', 'reward_newsscore');
+e107::getEvent()->register('newscore', 'reward_newsscore');
 function reward_newsscore ()
 {
     global $GOLD_PREF, $gold_obj;
@@ -470,7 +476,7 @@ if ((e_PAGE == 'db_input.php') && (isset($_POST['msg_body'])))
     return;
 }
 // USER SUBMITS LINK
-$e_event->register('linksub', 'reward_linksubmission');
+e107::getEvent()->register('linksub', 'reward_linksubmission');
 function reward_linksubmission ($glink)
 {
     global $GOLD_PREF, $gold_obj;
@@ -522,7 +528,9 @@ function reward_linksubmission ($glink)
     // return;
 }
 // USER SUBMITS NEWS
-$e_event->register('subnews', 'reward_newssubmission');
+
+e107::getEvent()->register('newspost', 'reward_newssubmission');
+e107::getEvent()->register('subnews', 'reward_newssubmission');
 function reward_newssubmission ()
 {
     global $GOLD_PREF, $gold_obj;
