@@ -46,19 +46,20 @@ class gold_shop
     {
         global $sql, $eArrayStorage, $GOLD_SHOP_PREF;
         // get preferences from database
+        $sql = e107::getDb();
         if (!is_object($sql))
         {
             $sql = new db;
         }
-        $num_rows = $sql->db_Select('core', '*', "e107_name='plugin_gold_shop' ");
+        $num_rows = $sql->select('core', '*', "e107_name='plugin_gold_shop' ");
         $row = $sql->db_Fetch();
-
+				print_a($num_rows);
         if (empty($row['e107_value']))
         {
             // insert default preferences if none exist
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_SHOP_PREF);
-            $sql->db_Insert('core', "'gold_shop', '$tmp' ");
+            $sql->db_Insert('core', "'plugin_gold_shop', '$tmp' ");
             $sql->db_Select('core', '*', "e107_name='plugin_gold_shop' ");
         }
         else
