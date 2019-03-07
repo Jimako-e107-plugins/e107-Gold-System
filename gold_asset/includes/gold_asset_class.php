@@ -58,7 +58,7 @@ class gold_asset
             // insert default preferences if none exist
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_ASSET_PREF);
-            $sql->db_Insert('core', "'gold_asset', '$tmp' ");
+            $sql->db_Insert('core', "'plugin_gold_asset', '$tmp' ");
             $sql->db_Select('core', '*', "e107_name='plugin_gold_asset' ");
         }
         else
