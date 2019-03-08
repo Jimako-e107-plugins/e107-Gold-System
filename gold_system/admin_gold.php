@@ -30,6 +30,8 @@ include_lan(e_PLUGIN . 'gold_system/languages/' . e_LANGUAGE . '_admin_gold_syst
 include_lan(e_PLUGIN . 'gold_system/languages/' . e_LANGUAGE . '_gold_system.php');
 $gold_from = 0;
 
+$sql = e107::getDb();
+
 if (isset($_POST['gold_filter']) || isset($_POST['gold_update']) || isset($_POST['addgold']) || isset($_POST['deductgold']))
 {
     $gold_from = intval($_POST['gold_from']);
@@ -354,12 +356,13 @@ initTabs(\'gold_historytabs\',Array(' . $gold_tabs . '),0,\'100%\',\'\');
 
 if ($gold_action == '' || $gold_action == 'show')
 {
-    $gold_arg = "select count(gold_id) as gold_count from #gold_system as g left join #user as u on user_id=gold_id where user_name like '{$gold_user}'";
-    $sql->db_Select_gen($gold_arg, false);
-    extract($sql->db_Fetch());
+    $gold_arg = "select count(gold_id) as gold_count from #gold_system as g left join #user as u on user_id=gold_id where user_name like '{$gold_user}' LIMIT 1 ";
+    $gold_count = $sql->retrieve($gold_arg, false);
+ 
+    //extract($sql->db_Fetch());
 
     $gold_arg = "select g.*,u.user_name from #gold_system as g left join #user as u on user_id=gold_id where user_name like '{$gold_user}' order by gold_id limit $gold_from,25";
-    $sql->db_Select_gen($gold_arg, false);
+    $gold_records = $sql->retrieve($gold_arg, null, null,  true);
     $gold_text = '
 <form method="post" action="' . e_SELF . '" id="gold_form" >
 	<div>
@@ -380,7 +383,7 @@ if ($gold_action == '' || $gold_action == 'show')
 			<td class="forumheader2" style="width:15%;text-align:right;">' . ADLAN_GS_M006 . '</td>
 			<td class="forumheader2" style="width:15%;text-align:center;">' . ADLAN_GS_M007 . '</td>
 		</tr>	';
-    while ($gold_row = $sql->db_Fetch())
+    foreach($gold_records as $gold_row)
     {
         $gold_text .= '
 		<tr>

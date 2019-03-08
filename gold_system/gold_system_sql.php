@@ -11,15 +11,15 @@ CREATE TABLE gold_system_history (
   PRIMARY KEY  (gold_hist_id),
   KEY gold_hist_userid (gold_hist_user_id),
   KEY gold_hist_who (gold_hist_who)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 CREATE TABLE gold_system (
   gold_id bigint(11) unsigned NOT NULL default '0',
   gold_balance decimal(14,2) NOT NULL default '0.00',
   gold_spent decimal(14,2)  NOT NULL default '0.00',
-  gold_credit decimal(14,2) NOT NULL default '0.00' ,
+  gold_credit decimal(14,2) NOT NULL default '0.00',
   gold_inv text,
   gold_orb text,
   gold_additional text,
   PRIMARY KEY  (gold_id)
-) TYPE=MyISAM ;
+) ENGINE=MyISAM;
 

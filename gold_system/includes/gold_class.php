@@ -796,8 +796,10 @@ class gold
             if ($findimg > 0)
             {
                 // replace image location for gold symbol
-                $gold_pmmessage = eregi_replace("<img.*/>", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
+                //$gold_pmmessage = eregxi_replace("<img.*/>", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
+                $gold_pmmessage = preg_replace("/<img.*/>/i", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
             }
+            
         }
         require_once(e_PLUGIN . 'pm/pm_class.php');
         require_once(e_PLUGIN . 'pm/pm_func.php');

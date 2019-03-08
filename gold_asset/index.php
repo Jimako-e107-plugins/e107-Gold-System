@@ -17,7 +17,8 @@ if (!defined('e107_INIT'))
 {
     exit;
 }
-error_reporting(E_ALL);
+ 
+
 include_lan(e_PLUGIN . "gold_asset/languages/" . e_LANGUAGE . "_goldasset.php");
 if (substr($pref['plug_installed']['gold_system'], 0, 1) < 4)
 {
@@ -154,8 +155,8 @@ if (isset($_POST['gasset_buy']))
     }
 }
 // get this users list of assets
-$sql->db_Select('gold_asset', 'gasset_asset', 'where gasset_user_id =' . USERID, 'nowhere', false);
-while ($gasset_row = $sql->db_Fetch())
+$gasset_records = e107::getDb()->retrieve('gold_asset', 'gasset_asset', 'gasset_user_id =' . USERID,  true);
+foreach($gasset_records AS $gasset_row)
 {
     $gasset_myassets[] = $gasset_row['gasset_asset'];
 }
