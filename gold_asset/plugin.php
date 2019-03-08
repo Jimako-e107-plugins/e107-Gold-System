@@ -35,7 +35,7 @@ if (!defined('e107_INIT'))
 include_lan(e_PLUGIN . 'gold_asset/languages/' . e_LANGUAGE . '_goldasset.php');
 // Plugin info -------------------------------------------------------------------------------------------------------
 $eplug_name = 'Gold Asset';
-$eplug_version = '1.2';
+$eplug_version = '1.3';
 $eplug_author = 'Father Barry';
 $eplug_url = 'http://keal.me.uk';
 $eplug_email = '';

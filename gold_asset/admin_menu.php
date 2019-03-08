@@ -25,11 +25,18 @@ $var['admin_asset']['link'] = 'admin_asset.php';
 $var['admin_cat']['text'] = GOLD_ASSET_M_06;
 $var['admin_cat']['link'] = 'admin_cat.php';
 
+$var['admin_category']['text'] = GOLD_ASSET_M_06;
+$var['admin_category']['link'] = 'admin_category.php';
+$var['admin_category']['perm'] = 'P';
+
+
+$var['admin_newcategory']['text'] = LAN_CREATE . " " .GOLD_ASSET_O_06;
+$var['admin_newcategory']['link'] = 'admin_category.php?mode=main&action=create';
+$var['admin_newcategory']['perm'] = 'P';
+
 $var['admin_readme']['text'] = GOLD_ASSET_M_04;
 $var['admin_readme']['link'] = 'admin_readme.php';
+ 
 
-$var['admin_vupdate']['text'] = GOLD_ASSET_M_05;
-$var['admin_vupdate']['link'] = 'admin_vupdate.php';
-
-show_admin_menu(GOLD_ASSET_M_01, $action, $var);
+e107::getNav()->admin(GOLD_ASSET_M_01, $action, $var);
 
