@@ -314,7 +314,7 @@ else
 </form>
 ';
 }
-$ns->tablerender($title, $gold_text);
+$ns->tablerender($title, $gold_text, 'gold-system-history');
 require_once(FOOTERF);
 function is_odd($number)
 {

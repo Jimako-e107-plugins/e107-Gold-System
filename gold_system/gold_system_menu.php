@@ -75,6 +75,7 @@ else
             }
         }
     }
+    
     if ($GOLD_PREF["gold_expanding"] != 1)
     {
         $gold_text .= '
@@ -113,7 +114,8 @@ else
     else
     {
         $gold_text .= '
-<div class="fcaption" onclick="gold_menu(\'gold_mine\')" id="gold_mine_div" style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM001 . '</div>
+<div class="fcaption" onclick="gold_menu(\'gold_mine\')" id="gold_mine_div" 
+style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM001 . '</div>
 	<div id="gold_mine" style="display:;">';
         if (isset($gold_present))
         {
@@ -124,11 +126,11 @@ else
         {
             $gold_text .= $gold_summary;
         }
-
+ $gold_text .= '
+ 	</div>';
         if (isset($gold_pluginlist))
         {
-            $gold_text .= '
- 	</div>
+$gold_text .= '
 <div class="fcaption" onclick="gold_menu(\'gold_app\')" id="gold_app_div"  style="cursor:hand;background-image:url(\'' . e_PLUGIN_ABS . 'gold_system/images/close.png\');background-repeat:no-repeat;background-position:right;" >' . LAN_GS_GM015 . '</div>
 	<div id="gold_app" style="display:;">';
 
@@ -165,6 +167,7 @@ else
 
 gold_menu()
         </script>';
+ 
 }
 }
 if (file_exists(e_PLUGIN. 'gold_system/images/gold_menu.png'))

@@ -62,7 +62,8 @@ if (e_PAGE == 'user.php' OR strpos(e_REQUEST_URI,'/user/') !== false )
     $detect2 = strpos($USER_FULL_TEMPLATE, "{USER_UPDATE_LINK}") - 1;
     $detect = $detect2 - $detect1;
     $profile_old = substr($USER_FULL_TEMPLATE, $detect1, $detect);
-    $profile_new = "
+    $profile_new = "    
+<table>    
 <tr>
 	<td style='width:30%' class='forumheader3'><a href='" . e_PLUGIN . "gold_system/donate.php?{$gold_uuid}'>{$GOLD_PREF['gold_currency_name']}</a></td>
 	<td style='width:70%' class='forumheader3'>" . $gold_obj->formation($goldID) . $gold_linkHist . "</td>
@@ -70,7 +71,8 @@ if (e_PAGE == 'user.php' OR strpos(e_REQUEST_URI,'/user/') !== false )
 <tr>
 	<td style='width:30%' class='forumheader3'>" . LAN_GS_GM013 . "</td>
 	<td style='width:70%' class='forumheader3'>{USER_SPENT}</td>
-</tr>";
+</tr>
+<table>";
     $USER_FULL_TEMPLATE = str_replace($profile_old, $gold_form . $profile_old . $profile_new, $USER_FULL_TEMPLATE);
 }
 

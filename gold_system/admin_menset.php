@@ -87,7 +87,7 @@ $gold_text = '
 	<tr>
 		<td class="forumheader3" style="width:30%">' . ADLAN_GS_MS10 . '</td>
 		<td class="forumheader3" style="width:70%">
-			<input type="text" class="tbox" name="gold_mrichest" style="width:30px;" value="'.$GOLD_PREF["gold_mrichest"].'" />
+			<input type="text" class="tbox" name="gold_mrichest" style="width:70px;" value="'.$GOLD_PREF["gold_mrichest"].'" />
 		</td>
 	</tr>
 	<tr>

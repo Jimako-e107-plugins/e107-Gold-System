@@ -13,7 +13,7 @@
 */
 require_once('../../class2.php');
 if (!defined('e107_INIT'))
-{
+{  
     exit;
 }
 if (!getperms('P'))
@@ -32,6 +32,7 @@ $gold_from = 0;
 
 $sql = e107::getDb();
 
+ 
 if (isset($_POST['gold_filter']) || isset($_POST['gold_update']) || isset($_POST['addgold']) || isset($_POST['deductgold']))
 {
     $gold_from = intval($_POST['gold_from']);
@@ -94,7 +95,11 @@ if (isset($_POST['addgold']))
         $gold_msg = ADLAN_GS_M017;
         $gold_action = 'edit';
     }
+      unset($_POST);
+			unset($_REQUEST);
+		  header('Location: '.$_SERVER['REQUEST_URI']);   
 }
+
 if (isset($_POST['deductgold']))
 {
     // ***************************************************************************
@@ -134,8 +139,12 @@ if (isset($_POST['deductgold']))
         $gold_msg = ADLAN_GS_M017;
         $gold_action = 'edit';
     }
+      unset($_POST);
+			unset($_REQUEST);
+		  header('Location: '.$_SERVER['REQUEST_URI']);
 }
 
+ 
 if ($gold_action == 'edit')
 {
     $sql->db_Select_gen('select * from #gold_system left join #user on gold_id=user_id where gold_id=' . $gold_uid, false);
