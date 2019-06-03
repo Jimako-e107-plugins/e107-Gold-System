@@ -17,7 +17,7 @@ if (!defined('e107_INIT'))
 }
 include_lan(e_PLUGIN . 'gold_system/languages/' . e_LANGUAGE . '_admin_gold_system.php');
 $eplug_name = 'Gold System';
-$eplug_version = '4.4';
+$eplug_version = '5.0';
 $eplug_author = 'Father Barry';
 $eplug_folder = 'gold_system';
 $eplug_icon = $eplug_folder . '/images/gold_32.gif';

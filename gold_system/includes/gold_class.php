@@ -786,6 +786,7 @@ class gold
     function gold_notify($gold_pmto, $gold_pmfrom, $gold_pmsubject, $gold_pmmessage)
     {
         global $sysprefs, $retrieve_prefs, $pref, $PLUGINS_DIRECTORY;
+ 
         $retrieve_prefs[] = 'pm_prefs';
         if (!check_class($pref['post_html']))
         {
@@ -795,12 +796,13 @@ class gold
             $findimg = strpos($gold_pmmessage, 'gold_system/images/gold.gif');
             if ($findimg > 0)
             {
-                // replace image location for gold symbol
+                // replace image location for gold symbol  
                 //$gold_pmmessage = eregxi_replace("<img.*/>", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
-                $gold_pmmessage = preg_replace("/<img.*/>/i", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
+                $gold_pmmessage = preg_replace("#<img.*/>#i", '[img]' . SITEURL . $PLUGINS_DIRECTORY . 'gold_system/images/gold.gif[/img]', $gold_pmmessage);
             }
             
         }
+ 
         require_once(e_PLUGIN . 'pm/pm_class.php');
         require_once(e_PLUGIN . 'pm/pm_func.php');
         include_lan(e_PLUGIN . 'pm/languages/' . e_LANGUAGE . '.php');
@@ -817,6 +819,7 @@ class gold
         $gold_posthtml = $pref['post_html'];
         $pref['post_html'] = 0;
         $res = $gold_pm->add($gold_vars);
+ 
         $pref['post_html'] = $gold_posthtml ;
     }
     // ***************************************************************************
