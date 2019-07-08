@@ -31,14 +31,11 @@ class gold_dl
     }
     function save_prefs()
     {
-        global $sql, $eArrayStorage, $GOLD_DL_PREF;
+        global $eArrayStorage, $GOLD_DL_PREF;
         // save preferences to database
-        if (!is_object($sql))
-        {
-            $sql = new db;
-        }
+ 
         $tmp = $eArrayStorage->WriteArray($GOLD_DL_PREF);
-        $sql->db_Update('core', "e107_value='$tmp' where e107_name='plugin_gold_download'", false);
+        e107::getDb()->update('core', "e107_value='$tmp' where e107_name='plugin_gold_download'", false);
         return ;
     }
     function load_prefs()
@@ -57,7 +54,7 @@ class gold_dl
             // insert default preferences if none exist
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_DL_PREF);
-            $sql->db_Insert('core', "'gold_download', '$tmp' ");
+            $sql->db_Insert('core', "'plugin_gold_download', '$tmp' ");
             $sql->db_Select('core', '*', "e107_name='plugin_gold_download' ");
         }
         else
