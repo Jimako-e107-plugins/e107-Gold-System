@@ -109,6 +109,7 @@ if (USER)
                 $gold_pmessage = LAN_GS_DG018 . ' ' . $_POST['user'] . '<br /><br />' . LAN_GS_DG016 . ' ' . $gold_obj->formation($_POST['amount']) . ' ' . LAN_GS_DG017 . ' ' . USERNAME . '<br /><br />' . $_POST['comment'];
 
                 $gold_obj->gold_notify($goldrecipient, USERID, $gold_psubject, $gold_pmessage);
+                
                 $gold_newamount = $gold_obj->gold_additional[USERID]['donate'][$goldrecipient] ['amount'] + $_POST['amount'];
                 $gold_obj->gold_additional[USERID]['donate'][$goldrecipient] = array('amount' => $gold_newamount, 'month' => date('n'));
                 // print_a($gold_obj->gold_additional[USERID]['donate']);
@@ -123,7 +124,7 @@ if (USER)
             $_POST['user'] = '';
             $_POST['comment'] = '';
             $_POST['amount'] = 0;
-            // header("Location:".SITEURL.$PLUGINS_DIRECTORY."gold_system/donate.php?OK");
+            header("Location:".SITEURL.$PLUGINS_DIRECTORY."gold_system/donate.php?OK");
         }
     }
 
