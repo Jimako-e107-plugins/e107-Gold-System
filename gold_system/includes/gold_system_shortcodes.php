@@ -214,7 +214,7 @@ return '<textarea class="tbox form-control" cols="22" rows="5" style="width:80%"
 SC_END
 
 SC_BEGIN GOLD_DONATE_SUBMIT
-return '<input class="button" type="submit" name="submitgold" value="' . LAN_GS_6 . '" />';
+return '<input class="button btn btn-primary" type="submit" name="submitgold" value="' . LAN_GS_6 . '" />';
 SC_END
 
 SC_BEGIN GOLD_BUY_UNITCOST
@@ -984,11 +984,11 @@ return $gold_obj->formation($gold_obj->gold_balance(USERID));
 SC_END
 
 SC_BEGIN GOLD_USR_PROCEED
-return '<input type="submit" class="button" name="gold_usrok" value="' . LAN_GS_USR05 . '" />';
+return '<input type="submit" class="button btn btn-primary" name="gold_usrok" value="' . LAN_GS_USR05 . '" />';
 SC_END
 
 SC_BEGIN GOLD_USR_CANCEL
-return '<input type="submit" class="button" name="goldusrcancel" value="' . LAN_GS_USR06 . '" />';
+return '<input type="submit" class="button btn btn-default" name="goldusrcancel" value="' . LAN_GS_USR06 . '" />';
 SC_END
 
 SC_BEGIN GOLD_MYPLUGINS
