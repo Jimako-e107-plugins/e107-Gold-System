@@ -53,7 +53,7 @@ class gold_shop
         }
         $num_rows = $sql->select('core', '*', "e107_name='plugin_gold_shop' ");
         $row = $sql->db_Fetch();
-				print_a($num_rows);
+			//	print_a($num_rows);
         if (empty($row['e107_value']))
         {
             // insert default preferences if none exist

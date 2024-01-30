@@ -21,10 +21,10 @@ $var['admin_config']['link'] = 'admin_config.php';
 
 $var['admin_asset']['text'] = GOLD_ASSET_M_03;
 $var['admin_asset']['link'] = 'admin_asset.php';
-
+/*
 $var['admin_cat']['text'] = GOLD_ASSET_M_06;
 $var['admin_cat']['link'] = 'admin_cat.php';
-
+*/
 $var['admin_category']['text'] = GOLD_ASSET_M_06;
 $var['admin_category']['link'] = 'admin_category.php';
 $var['admin_category']['perm'] = 'P';

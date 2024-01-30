@@ -28,8 +28,8 @@ if (!defined('ADMIN_WIDTH'))
 {
     define(ADMIN_WIDTH, 'width:100%;');
 }
-
-include_lan(e_PLUGIN . 'gold_classes/languages/' . e_LANGUAGE . '.php');
+ 
+include_lan(e_PLUGIN . 'gold_classes/languages/admin/' . e_LANGUAGE . '.php');
 if (!is_object($goldclass_obj))
 {
     require_once(e_PLUGIN . 'gold_classes/includes/gold_classes_class.php');

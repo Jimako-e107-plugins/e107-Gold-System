@@ -67,7 +67,7 @@ class goldclasses
             // insert default preferences if none exist
             $this->getDefaultPrefs();
             $tmp = $eArrayStorage->WriteArray($GOLD_CLASSPREF);
-            $sql->db_Insert('core', "'gold_classes', '$tmp' ");
+            $sql->db_Insert('core', "'plugin_gold_classes', '$tmp' ");
             $sql->db_Select('core', '*', "e107_name='plugin_gold_classes' ");
         }
         else
