@@ -30,7 +30,7 @@ class gold
         // create a gold sql object
         if (!is_object($gold_sql))
         {
-            $gold_sql = new db;
+            $gold_sql = e107::getDb();
         }
 
         if (USER)
@@ -1196,8 +1196,9 @@ class gold
     // ***************************************************************************
     function write_additional($gold_userid)
     {
-        global $eArrayStorage, $gold_sql;
+        global $eArrayStorage;
         $gold_tmp = $eArrayStorage->WriteArray($this->gold_additional[$gold_userid]);
+		$gold_sql = e107::getDb();
         $gold_sql->update('gold_system', 'gold_additional="' . $gold_tmp . '" where gold_id=' . $gold_userid, false);
     }
     // ***************************************************************************
