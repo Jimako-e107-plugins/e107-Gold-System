@@ -31,7 +31,9 @@ if (!is_object($gold_obj))
 require_once(e_PLUGIN . 'gold_system/includes/gold_class.php');
     $gold_obj = new gold;
 }
- 
+
+if (defined("e_PAGE"))
+{
 // ////////////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////
 // START REWARDS
@@ -59,6 +61,7 @@ if ((isset($_POST['chat_submit'])) && ($_POST['cmessage'] != "") && (!$sql->db_S
     $gold_obj->gold_modify($gold_param);
     return;
 }
+
 
 // edit forum post. forum/post/ 
 if ($GOLD_PREF['forum_addsub'] == 1 && (e_PAGE == 'forum_post.php' OR strpos(e_REQUEST_URI,'/forum/post/') !== false ) 
@@ -403,6 +406,7 @@ if ((e_PAGE == 'forum_post.php' OR strpos(e_REQUEST_URI,'/forum/post/') !== fals
     // $gold_obj->gold_modify($gold_param);
     // return;
 }
+
 // Old Auto Arcade Integration
 e107::getEvent()->register('newscore', 'reward_newsscore');
 function reward_newsscore ()
@@ -705,6 +709,7 @@ if (e_PAGE == 'request.php' && $gold_obj->plugin_active['gold_download'])
 // END CHARGES
 // ///////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////
+}
 // START FUNCTIONS - all are moved to gold class
 // and are to be considered deprecated
 function check_gold($gold_required, $action)
