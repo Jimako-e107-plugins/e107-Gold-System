@@ -22,7 +22,8 @@ class gold
     var $gold_additional = array();
     var $gold_plugins = array(); // installed plugins
     var $gold_nmessage = "";
-    function gold()
+
+    function __construct()
     {
         global $GOLD_PREF, $pref, $tp, $gold_sql, $gorb_obj;
         // get all the user's details
@@ -43,11 +44,11 @@ class gold
 
         if (file_exists(e_THEME . 'gold_system_template.php'))
         {
-            define(GOLD_THEME, e_THEME . 'gold_system_template.php');
+            define("GOLD_THEME", e_THEME . 'gold_system_template.php');
         }
         else
         {
-            define(GOLD_THEME, e_PLUGIN . 'gold_system/templates/gold_system_template.php');
+            define("GOLD_THEME", e_PLUGIN . 'gold_system/templates/gold_system_template.php');
         }
         if (isset($pref['plugin_installed']['gold_orb']) && $this->plugin_active('gold_orb'))
         {
@@ -615,10 +616,11 @@ class gold
     {
         global $gold_sql, $tp, $GOLD_PREF;
         $gold_arg = "select user_id,gold_id from #user left join #gold_system on user_id=gold_id where user_name='" . $tp->toDB($gold_username) . "'";
-        if ($gold_sql->db_Select_gen($gold_arg, false))
+		//  if ($gold_sql->db_Select_gen($gold_arg, false)) 
+		if ($gold_sql->gen($gold_arg, false))
         {
             // user exists in e107 and maybe gold_system
-            $gold_row = $gold_sql->db_Fetch();
+            $gold_row = $gold_sql->fetch();
             if (intval($gold_row['gold_id']) == 0)
             {
                 // user exists but not in gold_system
@@ -750,10 +752,11 @@ class gold
         {
             // only do it if they are a user otherwise nothing to get!
             $gold_arg = "select g.*,u.user_name,u.user_email,u.user_customtitle,u.user_join,u.user_lastvisit,user_currentvisit,u.user_chats,u.user_image,u.user_signature from #gold_system as g left join #user as u on user_id=gold_id  where gold_id={$gold_userid}";
-            if ($gold_sql->db_Select_gen($gold_arg, false))
+            //if ($gold_sql->db_Select_gen($gold_arg, false))
+			if ($gold_sql->gen($gold_arg, false))
             {
                 // get the data
-                $this->gold_member[$gold_userid] = $gold_sql->db_Fetch();
+                $this->gold_member[$gold_userid] = $gold_sql->fetch();
                 $this->gold_additional[$gold_userid] = $eArrayStorage->ReadArray($this->gold_member[$gold_userid]['gold_additional']);
             }
             else
@@ -762,9 +765,10 @@ class gold
                 // print $GOLD_PREF['gold_starting'];
                 $gold_sql->db_Insert('gold_system', "'" . $gold_userid . "', '{$GOLD_PREF['gold_starting']}', '0','0', '', '',''", false);
                 $gold_arg = "select g.*,u.user_name,u.user_email,u.user_customtitle,u.user_join,u.user_lastvisit,user_currentvisit,u.user_forums,u.user_chats,u.user_image,u.user_signature from #gold_system as g left join #user as u on user_id=gold_id  where gold_id={$gold_userid}";
-                if ($gold_sql->db_Select_gen($gold_arg, false))
+              //  if ($gold_sql->db_Select_gen($gold_arg, false))
+				if ($gold_sql->gen($gold_arg, false))
                 {
-                    $this->gold_member[$gold_userid] = $gold_sql->db_Fetch();
+                    $this->gold_member[$gold_userid] = $gold_sql->fetch();
                     $this->gold_additional[$gold_userid] = $eArrayStorage->ReadArray($this->gold_member[$gold_userid]['gold_additional']);
                 }
             }
