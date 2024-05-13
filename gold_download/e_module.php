@@ -42,7 +42,7 @@ if (!is_object($gold_dl_obj))
 
  /* fix for sef url */
 if($gold_obj->plugin_active('gold_download')) {
-   if ((e_PAGE == 'request.php' && strpos(e_QUERY,'download.')===false)
+   if ((defined("e_PAGE") && e_PAGE == 'request.php' && strpos(e_QUERY,'download.')===false)
    OR
    ( 
    strpos(e_REQUEST_URI,'/download/get/') !== false
